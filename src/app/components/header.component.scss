@@ -1,0 +1,29 @@
+.headerLink {
+  color: #fff;
+  padding: 0 0.8rem;
+  font-size: 1.6rem;
+
+  + .headerLink {
+    margin-left: 1.6rem;
+  }
+
+  &:hover {
+    background: rgba(1,1,1, .10);
+  }
+
+  &.active {
+    background: rgba(1,1,1,.15);
+
+    border-radius: .8rem;
+  }
+}
+
+.headerLinkHome {
+  margin-right: 3.2rem;
+
+  &:hover {
+    background: none;
+  }
+}
+
+

@@ -1,0 +1,28 @@
+md-input-container .md-input-description {
+  display: block;
+  position: absolute;
+  top: 100%;
+  top: calc(100% - 0.4rem);
+  height: 2rem;
+  line-height: 2.2rem;
+  color: map-get($mat-light-theme-foreground, hint-text);
+}
+
+md-input-container.md-input-invalid .md-error + .md-input-description {
+  display: none;
+}
+
+md-input-container.input-block, md-select.input-block {
+  width: 100%;
+}
+
+.input-block {
+  display: block;
+  md-input-container {
+    width: 100%;
+  }
+}
+
+md-spinner.centered {
+  margin: 0 auto;
+}

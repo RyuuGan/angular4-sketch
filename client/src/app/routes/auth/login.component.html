@@ -1,0 +1,46 @@
+<form id="loginForm"
+      (ngSubmit)="loginForm.form.valid && onSubmit()"
+      #loginForm="ngForm">
+  <md-card>
+    <md-card-title>
+      <div translate>Вход в систему</div>
+    </md-card-title>
+
+    <md-card-content>
+      <div class="input-block">
+        <md-input-container>
+          <input mdInput
+                 type="email"
+                 autofocus
+                 [(ngModel)]="email"
+                 email="true"
+                 required
+                 name="email"
+                 [placeholder]="'Email' | translate"/>
+        </md-input-container>
+      </div>
+      <div class="input-block">
+        <md-input-container>
+          <input mdInput
+                 [(ngModel)]="password"
+                 type="password"
+                 required
+                 name="password"
+                 [placeholder]="'Пароль' | translate">
+        </md-input-container>
+      </div>
+    </md-card-content>
+
+    <md-card-actions>
+      <button md-raised-button
+              [disabled]="!loginForm.form.valid"
+              color="primary"
+              type="submit">
+        <span translate>Войти</span>
+      </button>
+      <a routerLink="/auth/signup" md-button>
+        <span translate>Зарегистрироваться</span>
+      </a>
+    </md-card-actions>
+  </md-card>
+</form>

@@ -1,0 +1,62 @@
+<form id="loginForm"
+      (ngSubmit)="signupForm.form.valid && onSubmit()"
+      #signupForm="ngForm">
+  <md-card>
+    <md-card-title translate>Регистрация пользователя</md-card-title>
+    <md-card-content>
+      <div class="input-block">
+        <md-input-container>
+          <input mdInput
+                 type="email"
+                 [(ngModel)]="user.email"
+                 email="true"
+                 required
+                 name="email"
+                 [placeholder]="'Email' | translate"/>
+        </md-input-container>
+      </div>
+      <div class="input-block">
+        <md-input-container>
+          <input mdInput
+                 type="email"
+                 [(ngModel)]="user.firstName"
+                 required
+                 name="firstName"
+                 [placeholder]="'Имя' | translate"/>
+        </md-input-container>
+      </div>
+      <div class="input-block">
+        <md-input-container>
+          <input mdInput
+                 type="email"
+                 [(ngModel)]="user.lastName"
+                 required
+                 name="lastName"
+                 [placeholder]="'Фамилия' | translate"/>
+        </md-input-container>
+      </div>
+      <div class="input-block">
+        <md-input-container>
+          <input mdInput
+                 [(ngModel)]="user.password"
+                 type="password"
+                 required
+                 name="password"
+                 [placeholder]="'Пароль' | translate">
+        </md-input-container>
+      </div>
+    </md-card-content>
+
+    <md-card-actions>
+      <button md-raised-button
+              [disabled]="!signupForm.form.valid"
+              color="primary"
+              type="submit">
+        <span translate>Зарегистрироваться</span>
+      </button>
+      <a routerLink="/auth/login" md-button>
+        <span translate>Войти</span>
+      </a>
+    </md-card-actions>
+  </md-card>
+</form>

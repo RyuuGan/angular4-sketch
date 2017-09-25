@@ -1,0 +1,75 @@
+// --------------------------
+// Точки адаптивного перехода
+// --------------------------
+
+$screen-small-max:  600px !default
+$screen-medium-min:  601px !default
+$screen-medium-max:  960px !default
+$screen-large-min:  961px !default
+
+$primary:  #0C6 !default
+$primary-text:  #eee !default
+$primary-lower:  #093 !default
+
+$primary-alt:  #096 !default
+$primary-text:  #eee !default
+$primary-alt-lower:  #063 !default
+
+$secondary:  #3B5A9A !default
+$secondary-text:  #eee !default
+$secondary-lower:  #036 !default
+
+$secondary-alt:  #2CA8D2 !default
+$secondary-alt-text:  #eee !default
+$secondary-alt-lower:  #28b !default
+
+$danger:  #c33 !default
+$danger-text:  #fff !default
+$danger-lower:  #b22 !default
+
+// ----------
+// Переменные
+// ----------
+
+$font-main:  Roboto, Segoe UI, sans-serif !default
+$font-weight:  400 !default
+$font-size-px:  16 !default
+
+// toolbar
+
+$font-toolbar:  font-main !default
+$font-toolbar-weight:  300 !default
+$font-toolbar-size:  85% !default
+
+$color-toolbar:  #777 !default
+$color-toolbar-hover:  $secondary-lower !default
+$color-toolbar-active:  $secondary-lower !default
+$color-toolbar-title:  #333 !default
+
+// -------
+// Размеры
+// -------
+
+$font-size:  1.6rem !default
+$line-height:  1.5 !default
+$gap:  1.6rem !default
+
+$type-larger:  3.2rem !default
+$type-large:  2rem !default
+$type-normal:  1.6rem !default
+$type-small:  14rem !default
+$type-smaller:  12rem !default
+
+$gap-smaller:  $gap / 4 !default
+$gap-small:  $gap / 2 !default
+$gap-normal:  $gap !default
+$gap-large:  $gap * 2 !default
+$gap-larger:  $gap * 4 !default
+
+$sizes: 'smaller' 'small' 'normal' 'large' 'larger';
+
+// ------------
+// Радиус углов
+// ------------
+
+$border-radius:  0.4rem !default

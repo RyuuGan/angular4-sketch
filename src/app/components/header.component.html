@@ -1,0 +1,18 @@
+<md-toolbar color="primary" class="mat-elevation-z6">
+  <a routerLink="/" class="headerLink headerLinkHome">SITE NAME</a>
+  <a *ngIf="!!principal"
+     class="headerLink"
+     routerLink="/my"
+     routerLinkActive="active">/my</a>
+  <span class="flex-fill"></span>
+  <a *ngIf="!principal"
+     routerLink="/auth/login"
+     md-button
+     translate>Войти</a>
+  <a (click)="logout()"
+     *ngIf="!!principal"
+     md-button
+     translate>Выйти</a>
+</md-toolbar>
+
+
