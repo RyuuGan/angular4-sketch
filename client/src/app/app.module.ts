@@ -24,8 +24,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MissingTranslation } from './missingTranslation';
 import { HeaderService } from './services/header.service';
 import { AuthService } from './services/auth.service';
-import { NgIdleModule } from '@ng-idle/core';
-import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { MomentModule } from 'angular2-moment';
 
 @NgModule({
@@ -49,8 +47,6 @@ import { MomentModule } from 'angular2-moment';
         useClass: MissingTranslation
       }
     }),
-    NgIdleModule.forRoot(),
-    NgIdleKeepaliveModule.forRoot(),
     SimpleNotificationsModule.forRoot()
   ],
   declarations: [

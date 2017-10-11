@@ -6,6 +6,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 
 @Injectable()
 export class AuthService {
@@ -166,7 +167,7 @@ export class AuthService {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
-    return Observable.throw(errMsg);
+    return Observable.of(null);
   }
 
 }
