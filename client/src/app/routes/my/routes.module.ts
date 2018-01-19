@@ -6,7 +6,6 @@ import { AuthGuard } from '../../services/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../sharedModule';
-import { ResourceModule } from 'ngx-resource';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material';
 import { MyPaginatorIntl } from '../../MyPaginatorIntl';
 
@@ -40,7 +39,6 @@ let routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
-    ResourceModule.forRoot(),
     MatPaginatorModule,
     SharedModule
   ],
