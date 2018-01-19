@@ -69,20 +69,9 @@
     "rest-core": "^0.2.2",
     "rxjs": "^5.5.6",
     "sha.js": "^2.4.9",
-    "zone.js": "^0.8.20"
-  },
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "homepage": "",
-  "description": "",
-  "devDependencies": {
-    "eslint": "^4.15.0",
-    "pre-commit": "^1.2.2",
+    "zone.js": "^0.8.20",
+    "rimraf": "^2.5.1",
+    "webpack": "^3.10.0",
     "@angularclass/hmr": "^1.0.1",
     "@angularclass/hmr-loader": "^3.0.4",
     "@biesbjerg/ngx-translate-extract": "^2.3.2",
@@ -108,7 +97,6 @@
     "postcss-loader": "^1.1.0",
     "raw-loader": "0.5.1",
     "remap-istanbul": "^0.6.4",
-    "rimraf": "^2.5.1",
     "sass-loader": "^6.0.1",
     "shelljs": "^0.7.0",
     "style-loader": "^0.13.0",
@@ -122,8 +110,20 @@
     "uglify-js": "^3.0.28",
     "uglifyjs-webpack-plugin": "^0.4.6",
     "url-loader": "^0.5.9",
-    "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "pre-commit": "^1.2.2"
   },
   "pre-commit": [
     "eslint"
