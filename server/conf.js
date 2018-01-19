@@ -60,7 +60,7 @@ class Conf {
   }
 
   get mongoUrl() {
-    return process.env.MONGO_URL || 'mongodb://127.0.0.1/yourDbHere';
+    return process.env.MONGODB_URI || 'mongodb://127.0.0.1/yourDbHere';
   }
 
   path(relPath) {

@@ -1,0 +1,9 @@
+{
+  "name": "angular-sketch",
+  "engines": {
+    "node": "8.x"
+  },
+  "scripts": {
+    "start": "cd server && node run.js"
+  }
+}
