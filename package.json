@@ -19,12 +19,12 @@
     "start:hmr": "npm run server -- --hot",
     "build:tsc": "tsc -p .",
     "build:tsc:watch": "tsc -w -p . ",
-    "extractLocale": "ngx-translate-extract --input ./src/app --output ./src/assets/i18n/*.json --sort --format json"
+    "extractLocale": "ngx-translate-extract --input ./src/app --output ./src/assets/i18n/*.json --sort --format json",
+    "postinstall": "npm run build"
   },
   "engines": {
     "node": "8.x.x"
   },
-  "heroku-postbuild": "npm run build",
   "dependencies": {
     "async": "^2.6.0",
     "bcrypt": "^1.0.3",
