@@ -178,7 +178,10 @@ module.exports = function makeWebpackConfig() {
     new webpack.DefinePlugin({
       // Environment helpers
       'process.env': {
-        ENV: JSON.stringify(ENV)
+        ENV: JSON.stringify(ENV),
+        apiHost: isProd ? '"angular-sketch.herokuapp.com"' : '"127.0.0.1:3001"',
+        host: isProd ? '"angular-sketch.herokuapp.com"' : '"127.0.0.1:3000"',
+        secured: isProd ? false : false
       }
     }),
 
