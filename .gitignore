@@ -1,5 +1,6 @@
 .idea
 node_modules
+package-lock.json
 jspm_packages
 npm-debug.log
 debug.log
@@ -12,3 +13,4 @@ e2e/**/*.js
 e2e/**/*.js.map
 _test-output
 _temp
+
