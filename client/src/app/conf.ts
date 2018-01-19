@@ -2,9 +2,9 @@ class Conf {
   production = false;
   test = false;
   locales: string[] = ['ru'];
-  apiHost = '127.0.0.1:3001';
-  host = '127.0.0.1:3000';
-  secured = false;
+  readonly apiHost = process.env.apiHost;
+  readonly host = process.env.host;
+  readonly secured = process.env.secured;
 
   get apiOrigin() {
     return this.secured ? 'https://' + this.apiHost : 'http://' + this.apiHost;

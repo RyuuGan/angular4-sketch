@@ -181,7 +181,7 @@ module.exports = function makeWebpackConfig() {
         ENV: JSON.stringify(ENV),
         apiHost: isProd ? '"angular-sketch.herokuapp.com"' : '"127.0.0.1:3001"',
         host: isProd ? '"angular-sketch.herokuapp.com"' : '"127.0.0.1:3000"',
-        secured: isProd ? false : false
+        secured: isProd ? true : false
       }
     }),
 
