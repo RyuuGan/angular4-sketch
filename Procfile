@@ -1,1 +1,1 @@
-web: SERVE_STATIC=true PORT=$PORT npm start
+web: SERVE_STATIC=true PORT=$PORT MONGODB_URI=$MONGODB_URI npm start
