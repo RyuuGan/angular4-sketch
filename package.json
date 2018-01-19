@@ -1,25 +1,46 @@
 {
-  "name": "YOUR_NAME_HERE",
+  "name": "YOURNAMEHERE",
   "version": "0.0.1",
-  "license": "MIT",
+  "private": true,
   "scripts": {
+    "start": "cd server && node run.js",
+    "eslint": "eslint server",
     "clean": "rimraf node_modules doc dist && npm cache clean",
     "clean-install": "npm run clean && npm install",
     "clean-start": "npm run clean-install && npm start",
     "watch": "webpack --watch --progress --profile",
-    "build": "rimraf dist && webpack --progress --profile --bail",
-    "server": "webpack-dev-server --inline --progress --port 3000",
+    "build": "rimraf client/dist && webpack --progress --profile --bail",
+    "serverClient": "webpack-dev-server --inline --progress --port 3000",
     "lint": "tslint --force \"src/**/*.ts\"",
     "pretest": "npm run lint",
     "posttest": "remap-istanbul -i coverage/json/coverage-final.json -o coverage/html -t html",
     "docs": "typedoc --options typedoc.json src/app/app.component.ts",
-    "start": "npm run server",
+    "startClient": "npm run serverClient",
     "start:hmr": "npm run server -- --hot",
     "build:tsc": "tsc -p .",
     "build:tsc:watch": "tsc -w -p . ",
     "extractLocale": "ngx-translate-extract --input ./src/app --output ./src/assets/i18n/*.json --sort --format json"
   },
   "dependencies": {
+    "async": "^2.6.0",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "debug": "^3.1.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.2",
+    "express-async-wrap": "^1.0.0",
+    "fs-extra": "^4.0.1",
+    "jsonwebtoken": "^8.1.0",
+    "kerberos": "0.0.23",
+    "moment": "^2.20.1",
+    "mongoose": "^4.11.10",
+    "morgan": "^1.9.0",
+    "nodemailer": "^4.4.1",
+    "nodemailer-html-to-text": "^2.1.0",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "sprintf": "^0.1.5",
+    "stringex": "^0.2.4",
     "@angular/animations": "^5.2.1",
     "@angular/cdk": "^5.1.0",
     "@angular/common": "^5.2.1",
@@ -46,7 +67,18 @@
     "sha.js": "^2.4.9",
     "zone.js": "^0.8.20"
   },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "",
+  "description": "",
   "devDependencies": {
+    "eslint": "^4.15.0",
+    "pre-commit": "^1.2.2",
     "@angularclass/hmr": "^1.0.1",
     "@angularclass/hmr-loader": "^3.0.4",
     "@biesbjerg/ngx-translate-extract": "^2.3.2",
@@ -88,5 +120,8 @@
     "url-loader": "^0.5.9",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.0"
-  }
+  },
+  "pre-commit": [
+    "eslint"
+  ]
 }

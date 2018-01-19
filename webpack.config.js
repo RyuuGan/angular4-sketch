@@ -48,9 +48,9 @@ module.exports = function makeWebpackConfig() {
      * Reference: http://webpack.github.io/docs/configuration.html#entry
      */
     config.entry = isTest ? {} : {
-      'polyfills': './src/polyfills.ts',
-      'vendor': './src/vendor.ts',
-      'app': './src/main.ts' // our angular app
+      'polyfills': './client/src/polyfills.ts',
+      'vendor': './client/src/vendor.ts',
+      'app': './client/src/main.ts' // our angular app
     };
   }
 
@@ -59,7 +59,7 @@ module.exports = function makeWebpackConfig() {
    * Reference: http://webpack.github.io/docs/configuration.html#output
    */
   config.output = isTest ? {} : {
-    path: root('dist'),
+    path: root('client/dist'),
     publicPath: isProd ? '/' : '/',
     filename: isProd ? 'public/js/[name].[hash].js' : 'public/js/[name].js',
     chunkFilename: isProd ? '[id].[hash].chunk.js' : '[id].chunk.js'
@@ -109,7 +109,7 @@ module.exports = function makeWebpackConfig() {
       // all css in src/style will be bundled in an external css file
       {
         test: /\.css$/,
-        exclude: root('src', 'app'),
+        exclude: root('./client/src', 'app'),
         loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader']
@@ -118,7 +118,7 @@ module.exports = function makeWebpackConfig() {
       // all css required in src/app files will be merged in js files
       {
         test: /\.css$/,
-        include: root('src', 'app'),
+        include: root('./client/src', 'app'),
         loader: 'raw-loader!postcss-loader'
       },
 
@@ -127,7 +127,7 @@ module.exports = function makeWebpackConfig() {
       // all css in src/style will be bundled in an external css file
       {
         test: /\.(scss|sass)$/,
-        exclude: root('src', 'app'),
+        exclude: root('./client/src', 'app'),
         loader: isTest ? 'null-loader' : ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: ['css-loader', 'postcss-loader', 'sass-loader']
@@ -136,13 +136,13 @@ module.exports = function makeWebpackConfig() {
       // all css required in src/app files will be merged in js files
       {
         test: /\.(scss|sass)$/,
-        exclude: root('src', 'style'),
+        exclude: root('./client/src', 'style'),
         loader: 'raw-loader!postcss-loader!sass-loader'
       },
 
       // support for .html as raw text
       // todo: change the loader to something that adds a hash to images
-      { test: /\.html$/, loader: 'raw-loader', exclude: root('src', 'assets') }
+      { test: /\.html$/, loader: 'raw-loader', exclude: root('./client/src', 'assets') }
     ]
   };
 
@@ -186,7 +186,7 @@ module.exports = function makeWebpackConfig() {
     new webpack.ContextReplacementPlugin(
       // The (\\|\/) piece accounts for path separators in *nix and Windows
       /angular(\\|\/)core(\\|\/)@angular/,
-      root('./src') // location of your src
+      root('./client/src') // location of your src
     ),
 
     // Tslint configuration for webpack 2
@@ -255,7 +255,7 @@ module.exports = function makeWebpackConfig() {
       // Inject script and link tags into html files
       // Reference: https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-        template: root('./src/assets/index.html'),
+        template: root('./client/src/assets/index.html'),
         chunksSortMode: 'dependency'
       }),
 
@@ -290,8 +290,8 @@ module.exports = function makeWebpackConfig() {
       // Copy assets from the public folder
       // Reference: https://github.com/kevlened/copy-webpack-plugin
       new CopyWebpackPlugin([{
-        from: root('src/assets'),
-        to: root('dist')
+        from: root('client/src/assets'),
+        to: root('client/dist')
       }])
     );
   }
@@ -302,7 +302,7 @@ module.exports = function makeWebpackConfig() {
    * Reference: http://webpack.github.io/docs/webpack-dev-server.html
    */
   config.devServer = {
-    contentBase: './src/assets',
+    contentBase: './client/src/assets',
     historyApiFallback: true,
     quiet: true,
     stats: 'minimal' // none (or false), errors-only, minimal, normal (or true) and verbose
