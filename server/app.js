@@ -12,6 +12,7 @@ const app = module.exports = exports = express();
 
 app.disable('x-powered-by');
 
+app.set('port', conf.port);
 app.set('trust proxy', true);
 
 app.use(cors({
@@ -37,7 +38,7 @@ app.run = function (cb) {
     const server = http.createServer(app);
     process.on('SIGINT', app.shutdown);
     process.on('SIGTERM', app.shutdown);
-    server.listen(conf.port, conf.ip, function () {
+    server.listen(conf.port, function () {
       log('Listening on %s.', conf.port);
       log('Type %s in browser omnibox to begin.', conf.origin);
       if (typeof cb === 'function')
