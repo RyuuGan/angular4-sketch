@@ -48,9 +48,9 @@ module.exports = function makeWebpackConfig() {
      * Reference: http://webpack.github.io/docs/configuration.html#entry
      */
     config.entry = isTest ? {} : {
-      'polyfills': './src/polyfills.ts',
-      'vendor': './src/vendor.ts',
-      'app': './src/main.ts' // our angular app
+      'polyfills': root('./src/polyfills.ts'),
+      'vendor': root('./src/vendor.ts'),
+      'app': root('./src/main.ts') // our angular app
     };
   }
 
@@ -255,7 +255,7 @@ module.exports = function makeWebpackConfig() {
       // Inject script and link tags into html files
       // Reference: https://github.com/ampedandwired/html-webpack-plugin
       new HtmlWebpackPlugin({
-        template: './src/assets/index.html',
+        template: root('./src/assets/index.html'),
         chunksSortMode: 'dependency'
       }),
 
