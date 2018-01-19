@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 
-import { Http, HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -25,13 +24,14 @@ import { MissingTranslation } from './missingTranslation';
 import { HeaderService } from './services/header.service';
 import { AuthService } from './services/auth.service';
 import { MomentModule } from 'angular2-moment';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     FlexLayoutModule,
@@ -39,8 +39,8 @@ import { MomentModule } from 'angular2-moment';
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (http: Http) => new TranslateHttpLoader(http, './i18n/', '.json'),
-        deps: [Http]
+        useFactory: (http: HttpClient) => new TranslateHttpLoader(http, './i18n/', '.json'),
+        deps: [HttpClient]
       },
       missingTranslationHandler: {
         provide: MissingTranslationHandler,

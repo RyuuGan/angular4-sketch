@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 
 import { User } from '../model/user';
 import api from '../utils/api';
-import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/observable/of';
+import { TranslateService } from '@ngx-translate/core';
+import { NotificationsService } from 'angular2-notifications';
+
+import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ServerResponse } from '../model/serverResponse';
 
 @Injectable()
 export class AuthService {
@@ -16,15 +19,19 @@ export class AuthService {
   loaded = false;
   redirectUrl?: string;
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient,
+              private notifications: NotificationsService,
+              private translate: TranslateService) {
   }
 
   checkLogin(): Observable<boolean> {
     let $this = this;
     return this.getPrincipal()
-      .map(function () {
-        return $this.authenticated;
-      });
+      .pipe(
+        map(function () {
+          return $this.authenticated;
+        })
+      );
   }
 
   getPrincipal(): Observable<User> {
@@ -42,17 +49,26 @@ export class AuthService {
     }
     this.loaded = false;
 
-    let config = new RequestOptions({
-      headers: new Headers({
+    let authToken = AuthService.getAuthToken();
+
+    if (!authToken) {
+      return Observable.of(null);
+    }
+
+    let config = {
+      headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + AuthService.getAuthToken()
       })
-    });
+    };
 
     let $this = this;
+
     return this.http
-      .get(api.makeUrl('/principal', 'scim'), config)
-      .map(res => $this.processServerPrincipal(res))
+      .get(api.scim('/principal'), config)
+      .pipe(
+        map((res: ServerResponse) => $this.processServerPrincipal(res))
+      )
       .catch(res => $this.handleError(res));
   }
 
@@ -64,15 +80,17 @@ export class AuthService {
   }
 
   login(creds: any) {
-    let config = new RequestOptions({
-      headers: new Headers({
+    let config = {
+      headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
-    });
+    };
 
     return this.http
       .post(api.scim('/login'), creds, config)
-      .map(res => this.processServerLogin(res))
+      .pipe(
+        map((res: ServerResponse) => this.processServerLogin(res))
+      )
       .catch(err => this.handleError(err));
 
   }
@@ -121,17 +139,16 @@ export class AuthService {
   }
 
   static getAuthConfig() {
-    return new RequestOptions({
-      headers: new Headers({
+    return {
+      headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + AuthService.getAuthToken()
       })
-    });
+    };
   }
 
   // Helper functions
-  private processServerPrincipal(res: Response) {
-    let body = res.json();
+  private processServerPrincipal(body: ServerResponse) {
     if (body.error) {
       this.logout();
     } else {
@@ -141,8 +158,7 @@ export class AuthService {
     return this.principal;
   }
 
-  private processServerLogin(res: Response) {
-    let body = res.json();
+  private processServerLogin(body: ServerResponse) {
     if (body.error) {
       this.logout();
     } else {
@@ -153,16 +169,22 @@ export class AuthService {
     return this.principal;
   }
 
-  private handleError(error: Response | any) {
+  private handleError(error: any) {
     this.unsetUser();
     this.loaded = true;
     // In a real world app, you might use a remote logging infrastructure
 
     let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
+    if (error.error) {
+      const body = error || '';
       const err = body.error || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+
+      if (error.status === 0 || error.status === 502) {
+        this.notifications.error('', this.translate.instant('Сервер находится на профилактике. Повторите свою попытку позже.'), {
+          timeOut: 10000
+        });
+      }
     } else {
       errMsg = error.message ? error.message : error.toString();
     }

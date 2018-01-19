@@ -1,15 +1,13 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { MyLayoutComponent } from './layout';
-import { QRCodeModule } from 'angular2-qrcode';
-import { ClipboardModule } from 'ngx-clipboard/dist';
 import { PrincipalResolver } from '../../services/principal.resolver';
 import { AuthGuard } from '../../services/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../sharedModule';
 import { ResourceModule } from 'ngx-resource';
-import { MdPaginatorIntl, MdPaginatorModule } from '@angular/material';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material';
 import { MyPaginatorIntl } from '../../MyPaginatorIntl';
 
 let routes: Routes = [
@@ -43,9 +41,7 @@ let routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     ResourceModule.forRoot(),
-    QRCodeModule,
-    ClipboardModule,
-    MdPaginatorModule,
+    MatPaginatorModule,
     SharedModule
   ],
   declarations: [
@@ -55,7 +51,7 @@ let routes: Routes = [
   providers: [
     AuthGuard,
     PrincipalResolver,
-    { provide: MdPaginatorIntl, useClass: MyPaginatorIntl }
+    { provide: MatPaginatorIntl, useClass: MyPaginatorIntl }
   ],
   exports: [
     RouterModule

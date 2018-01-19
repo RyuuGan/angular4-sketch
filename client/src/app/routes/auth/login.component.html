@@ -1,15 +1,15 @@
 <form id="loginForm"
       (ngSubmit)="loginForm.form.valid && onSubmit()"
       #loginForm="ngForm">
-  <md-card>
-    <md-card-title>
+  <mat-card>
+    <mat-card-title>
       <div translate>Вход в систему</div>
-    </md-card-title>
+    </mat-card-title>
 
-    <md-card-content>
+    <mat-card-content>
       <div class="input-block">
-        <md-input-container>
-          <input mdInput
+        <mat-input-container>
+          <input matInput
                  type="email"
                  autofocus
                  [(ngModel)]="email"
@@ -17,30 +17,30 @@
                  required
                  name="email"
                  [placeholder]="'Email' | translate"/>
-        </md-input-container>
+        </mat-input-container>
       </div>
       <div class="input-block">
-        <md-input-container>
-          <input mdInput
+        <mat-input-container>
+          <input matInput
                  [(ngModel)]="password"
                  type="password"
                  required
                  name="password"
                  [placeholder]="'Пароль' | translate">
-        </md-input-container>
+        </mat-input-container>
       </div>
-    </md-card-content>
+    </mat-card-content>
 
-    <md-card-actions>
-      <button md-raised-button
+    <mat-card-actions>
+      <button mat-raised-button
               [disabled]="!loginForm.form.valid"
               color="primary"
               type="submit">
         <span translate>Войти</span>
       </button>
-      <a routerLink="/auth/signup" md-button>
+      <a routerLink="/auth/signup" mat-button>
         <span translate>Зарегистрироваться</span>
       </a>
-    </md-card-actions>
-  </md-card>
+    </mat-card-actions>
+  </mat-card>
 </form>

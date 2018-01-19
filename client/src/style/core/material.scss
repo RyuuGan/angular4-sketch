@@ -1,4 +1,4 @@
-md-input-container .md-input-description {
+mat-input-container .mat-input-description {
   display: block;
   position: absolute;
   top: 100%;
@@ -8,21 +8,21 @@ md-input-container .md-input-description {
   color: map-get($mat-light-theme-foreground, hint-text);
 }
 
-md-input-container.md-input-invalid .md-error + .md-input-description {
+mat-input-container.mat-input-invalid .mat-error + .mat-input-description {
   display: none;
 }
 
-md-input-container.input-block, md-select.input-block {
+mat-input-container.input-block, mat-select.input-block {
   width: 100%;
 }
 
 .input-block {
   display: block;
-  md-input-container {
+  mat-input-container {
     width: 100%;
   }
 }
 
-md-spinner.centered {
+mat-spinner.centered {
   margin: 0 auto;
 }

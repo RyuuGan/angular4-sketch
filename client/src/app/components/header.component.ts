@@ -1,8 +1,8 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import {
-  MdButtonModule,
-  MdIconModule,
-  MdToolbarModule
+  MatButtonModule,
+  MatIconModule,
+  MatToolbarModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -41,9 +41,9 @@ export class HeaderComponent implements OnInit {
 
 @NgModule({
   imports: [
-    MdToolbarModule,
-    MdIconModule,
-    MdButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
     TranslateModule,
     RouterModule,
     CommonModule

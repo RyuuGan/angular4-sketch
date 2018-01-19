@@ -1,17 +1,13 @@
-import { Resource } from 'ngx-resource';
-
-import { Observable } from 'rxjs/Observable';
-import { Subscriber } from 'rxjs/Subscriber';
-import { Http, Request, Response } from '@angular/http';
 import { AuthService } from '../services/auth.service';
 import { NavigationStart, Router } from '@angular/router';
+import { IRestActionInner, IRestResponse, Rest, RestHandler } from 'rest-core';
 
-export class RestResource extends Resource {
+export class RestResource extends Rest {
 
   routingDestination: string;
 
-  constructor(public http: Http, public router: Router, private auth: AuthService) {
-    super(http);
+  constructor(public restHandler: RestHandler, public router: Router, private auth: AuthService) {
+    super(restHandler);
 
     router
       .events
@@ -30,36 +26,27 @@ export class RestResource extends Resource {
     return headers;
   }
 
-  $responseInterceptor(observable: Observable<any>, _request?: Request): Observable<any> {
+  $handleSuccessResponse(_options: IRestActionInner, resp: IRestResponse): any {
 
-    return Observable.create((subscriber: Subscriber<any>) => {
+    let body = resp.body;
 
-      return observable.subscribe(
-        (res: Response) => {
+    if (!body) {
+      return;
+    }
 
-          let body = res.json();
-          if (body.error) {
+    if (body.error) {
 
-            if (body.errorCode === 'USER_NOT_AUTHENTICATED' || body.errorCode === 'TOKEN_VALIDATION_FAILED') {
-              this.auth.redirectUrl = this.routingDestination;
-              this.auth.logout();
-              this.router.navigate(['/auth/login']);
-              return;
-            }
+      if (body.errorCode === 'USER_NOT_AUTHENTICATED' || body.errorCode === 'TOKEN_VALIDATION_FAILED') {
+        this.auth.redirectUrl = this.routingDestination;
+        this.auth.logout();
+        this.router.navigate(['/auth/login']);
+        return;
+      }
 
-            subscriber.error(body);
-            return;
-          }
-          subscriber.next(body.results);
-        },
-        (error: Response) => {
-          // I also made a layer to parse errors
-          subscriber.error(error);
-        },
-        () => subscriber.complete()
-      );
+      throw body;
+    }
 
-    });
+    return body.results;
   }
 
 }

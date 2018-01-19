@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { Http, RequestOptions, Headers } from '@angular/http';
 import api from '../../utils/api';
+import sha256 from '../../utils/sha256';
 import { Observable } from 'rxjs/Observable';
-import { NotificationsService } from 'angular2-notifications/dist';
+import { NotificationsService } from 'angular2-notifications';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'cc-auth-login',
@@ -22,17 +23,17 @@ export class SignupComponent {
   constructor(private auth: AuthService,
               private router: Router,
               private notifications: NotificationsService,
-              private http: Http) {
+              private http: HttpClient) {
   }
 
   onSubmit() {
-    let config = new RequestOptions({
-      headers: new Headers({
+    let config = {
+      headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
-    });
+    };
 
-    let user = Object.assign({}, this.user, { password: this.user.password });
+    let user = Object.assign({}, this.user, { password: sha256(this.user.password) });
 
     return this.http
       .post(api.scim('/signup'), user, config)

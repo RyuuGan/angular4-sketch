@@ -1,9 +1,9 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Injectable } from '@angular/core';
-import { MdPaginatorIntl } from '@angular/material';
+import { MatPaginatorIntl } from '@angular/material';
 
 @Injectable()
-export class MyPaginatorIntl extends MdPaginatorIntl {
+export class MyPaginatorIntl extends MatPaginatorIntl {
 
   itemsPerPageLabel = '';
   nextPageLabel = '';

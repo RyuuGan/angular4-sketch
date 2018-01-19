@@ -1,4 +1,4 @@
-<md-toolbar color="primary" class="mat-elevation-z6">
+<mat-toolbar color="primary" class="mat-elevation-z6">
   <a routerLink="/" class="headerLink headerLinkHome">SITE NAME</a>
   <a *ngIf="!!principal"
      class="headerLink"
@@ -7,12 +7,12 @@
   <span class="flex-fill"></span>
   <a *ngIf="!principal"
      routerLink="/auth/login"
-     md-button
+     mat-button
      translate>Войти</a>
   <a (click)="logout()"
      *ngIf="!!principal"
-     md-button
+     mat-button
      translate>Выйти</a>
-</md-toolbar>
+</mat-toolbar>
 
 
